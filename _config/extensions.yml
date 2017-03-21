@@ -1,0 +1,9 @@
+---
+name: registripe_ticketselection
+---
+EventRegistration:
+  extensions:
+    - EventTicketSelectionExtension
+EventTicket:
+  extensions:
+    - EventTicketSelectionExtension
