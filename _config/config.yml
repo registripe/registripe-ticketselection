@@ -1,0 +1,6 @@
+---
+name: registripe_ticketselection
+after: registripe
+---
+EventRegisterController:
+  ticket_select_template: TicketCountSelections

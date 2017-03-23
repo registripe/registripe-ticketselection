@@ -3,7 +3,12 @@ name: registripe_ticketselection
 ---
 EventRegistration:
   extensions:
-    - EventTicketSelectionExtension
+    - EventRegistrationTicketSelectionExtension
+
 EventTicket:
   extensions:
-    - EventTicketSelectionExtension
+    - EventTicketTicketSelectionExtension
+
+EventRegisterController:
+  extensions:
+    - TicketSelectorRegisterControllerExtension
