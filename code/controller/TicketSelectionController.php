@@ -44,7 +44,7 @@ class TicketSelectionController extends Page_Controller {
 		$form->Fields()->unshift(
 			LiteralField::create("pager", $this->pager->renderWith("TicketPageIndicator"))
 		);
-		// $form->addCancelLink($this->BackURL);
+		$form->addCancelLink($this->prevLink(), "Back");
 		$this->extend("updateAttendeeForm", $form, $this->registration);
 		return $form;
 	}
@@ -64,6 +64,14 @@ class TicketSelectionController extends Page_Controller {
 		$this->registration->Attendees()->add($attendee);
 		
 		return $this->redirect($this->nextLink());
+	}
+
+	public function prevLink() {
+		$prev = $this->pager->prev();
+		if (!$prev) {
+			return $this->BackURL;
+		}
+		return $this->Parent()->Link() . "register/selection/" . $prev->ID;
 	}
 
 	public function nextLink() {

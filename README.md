@@ -11,6 +11,7 @@ Handles choosing tickets during registration process.
 
 ## TODO
 
+ * Server side validation failure removes form content
  * Display price estimate/summary.
  * Back button.
  * Prevent invalid submissions.

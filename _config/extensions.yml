@@ -12,3 +12,7 @@ EventTicket:
 EventRegisterController:
   extensions:
     - TicketSelectorRegisterControllerExtension
+
+EventAttendeeController:
+  extensions:
+    - EventAttendeeControllerTicketSelectionExtension
