@@ -56,7 +56,7 @@ class TicketSelectorRegisterControllerExtension extends Extension {
 		if (!$selection) {
 			return null;
 		}
-		return $this->owner->Link('selection/'.$selection->ID);
+		return $this->owner->Link($this->selectionSegment($selection));
 	}
 
 	public function selection($request) {
@@ -65,27 +65,32 @@ class TicketSelectorRegisterControllerExtension extends Extension {
 		if(!$registration || !is_numeric($id)) {
 			return $this->owner->index($request);
 		}
-		$selection = $registration->TicketSelections()->byID($id);
+		$selections = $registration->TicketSelections();
+		$selection = $selections->byID($id);
 		if(!$selection) {
 			return $this->owner->index($request);
 		}
 
-		// show edit or add form, based on whether selection has an attendee
-		$nexturl = $this->owner->Link('review');
-		$backurl = $this->owner->canReview() ?	$nexturl : $this->owner->Link();
-
+		$pager = ListPager::create($selections, $selection);
+		$backurl = ($prev = $pager->prev()) ? $this->owner->Link($this->selectionSegment($prev)) : $this->owner->Link();
+		$nexturl = ($next = $pager->next()) ? $this->owner->Link($this->selectionSegment($next)) : $this->owner->Link('review');
 		$record = new Page(array(
 			'ID' => -1,
 			'Title' => $selection->Ticket()->Title,
 			'ParentID' => $this->owner->ID,
-			'URLSegment' => 'register/selection/' . $selection->ID,
+			'URLSegment' => Controller::join_links('register', 'selection', $selection->ID),
 			'BackURL' => $backurl,
-			'NextURL' => $nexturl
+			'NextURL' => $nexturl,
+			'Content' => $pager->renderWith("TicketPageIndicator")
 		));
-		$controller = new TicketSelectionController($record, $registration, $selection);
-		// $this->owner->extend("updateTicketSelectionController", $controller, $record, $registration);
 
+		$controller = new TicketSelectionController($record, $registration, $selection);
+		$this->owner->extend("updateTicketSelectionController", $controller, $record, $registration);
 		return $controller;
+	}
+
+	protected function selectionSegment($selection) {
+		return Controller::join_links('selection', $selection->ID);
 	}
 
 }

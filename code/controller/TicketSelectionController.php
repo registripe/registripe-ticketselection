@@ -15,8 +15,6 @@ class TicketSelectionController extends Page_Controller {
 		parent::__construct($record);
 		$this->registration = $registration;
 		$this->selection = $selection;
-
-		$this->pager = ListPager::create($this->registration->TicketSelections(), $selection);
 	}
 
 	public function index($request) {
@@ -41,10 +39,7 @@ class TicketSelectionController extends Page_Controller {
 	public function AttendeeForm() {
 		$form = new EventAttendeeForm($this, "AttendeeForm");
 		$form->Actions()->push(FormAction::create("save", "Next"));
-		$form->Fields()->unshift(
-			LiteralField::create("pager", $this->pager->renderWith("TicketPageIndicator"))
-		);
-		$form->addCancelLink($this->prevLink(), "Back");
+		$form->addCancelLink($this->BackURL, "Back");
 		$this->extend("updateAttendeeForm", $form, $this->registration);
 		return $form;
 	}
@@ -54,32 +49,12 @@ class TicketSelectionController extends Page_Controller {
 		if (!$attendee) {
 			$attendee = $this->createAttendee();
 		}
-
 		$form->saveInto($attendee);
 		$attendee->write();
-
 		$this->selection->AttendeeID = $attendee->ID;
 		$this->selection->write();
-
 		$this->registration->Attendees()->add($attendee);
-		
-		return $this->redirect($this->nextLink());
-	}
-
-	public function prevLink() {
-		$prev = $this->pager->prev();
-		if (!$prev) {
-			return $this->BackURL;
-		}
-		return $this->Parent()->Link() . "register/selection/" . $prev->ID;
-	}
-
-	public function nextLink() {
-		$next = $this->pager->next();
-		if (!$next) {
-			return $this->NextURL;
-		}
-		return $this->Parent()->Link() . "register/selection/" . $next->ID;
+		return $this->redirect($this->NextURL);
 	}
 
 	/**
