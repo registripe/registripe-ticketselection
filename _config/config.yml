@@ -4,3 +4,6 @@ after: registripe
 ---
 EventRegisterController:
   ticket_select_template: TicketCountSelections
+
+EventTicket:
+  selection_type: AttendeeTicketSelection

@@ -19,19 +19,22 @@ class TicketSelectorRegisterControllerExtension extends Extension {
 	}
 
 	public function selectTicket($request) {
-		// TODO: CSRF security token usage
-		// TOOD: prevent getting tickets not part of this event
-		$ticket = EventTicket::get()->byID($request->param('ID'));
-		if (!$ticket || !$ticket->exists()) {
-			// TODO: log / store error?
-			return $this->owner->redirectBack();
-		}
+		// TODO: CSRF security
 		$reg = $this->owner->getCurrentRegistration();
+		$event = $reg->Event();
+		$tickets = $event->getAvailableTickets();
+		$selections = $reg->TicketSelections();
+
+		$ticket = $tickets->byID($request->param('ID'));
+		if (!$ticket || !$ticket->exists()) {
+			return $this->owner->redirectBack();
+		}		
 		if($request->postVar("action_add") !== null) {
-			$selection = $reg->createSelection($ticket);
+			$selection = $ticket->createSelection($ticket)->write();
+			$selections->add($selection);
 		}
 		if($request->postVar("action_subtract") !== null) {
-			$reg->TicketSelections()->sort("ID", "DESC")
+			$selections->sort("ID", "DESC")
 				->find("TicketID", $ticket->ID)->delete();
 		}
 		return $this->owner->redirectBack();
