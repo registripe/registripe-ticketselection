@@ -1,3 +1,3 @@
-<div class="ticket-page-indicator text-center">
-	Ticket: $Pos of $Length
+<div class="ticket-page-indicator">
+	<h3><% if $Title %>$Title<% else %>Ticket<% end_if %>: $Pos of $Length</h3>
 </div>
