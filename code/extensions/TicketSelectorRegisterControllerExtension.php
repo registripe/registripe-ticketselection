@@ -12,12 +12,6 @@ class TicketSelectorRegisterControllerExtension extends Extension {
 		'selection/$ID' => 'selection',
 	);
 
-	public function choose() {
-		return array(
-			"Form" => $this->owner->renderWith("TicketCountSelections")
-		);
-	}
-
 	public function selectTicket($request) {
 		// TODO: CSRF security
 		$reg = $this->owner->getCurrentRegistration();
