@@ -1,0 +1,9 @@
+RegistrableEvent:
+  empty_event:
+    Title: Empty Test Event
+
+EventRegistration:
+  empty:
+    FirstName: Joe
+    Surname: Bloggs
+    Email: foo@bar.net

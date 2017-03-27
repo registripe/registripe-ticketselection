@@ -7,3 +7,11 @@ EventRegisterController:
 
 EventTicket:
   selection_type: AttendeeTicketSelection
+
+EventRegistration:
+  calculation_components:
+    - Cost
+
+AttendeeTicketSelection:
+  calculators:
+    - SelectionCost
