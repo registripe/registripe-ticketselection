@@ -20,7 +20,7 @@ class SelectionCostCalculator extends AbstractCalculator{
 		$cost = 0;
 		$ticket = $this->selection->Ticket();
 		if($ticket && $ticket->hasPrice()){
-			$cost += $ticket->obj('Price')->getAmount();
+			$cost += $ticket->Price;
 		}
 		if($this->persist) {
 			$this->selection->Cost = $cost;

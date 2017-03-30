@@ -47,9 +47,11 @@
 <% end_loop %>
 </div>
 
-<% if SubTotal %>
-	<div class="row">
-		$SubTotal
+<% if CurrentRegistration.Cost %>
+	<div class="calculation_subtotal">
+		<div class="text-right">
+			<strong>Total: $CurrentRegistration.Cost.Nice</strong>
+		</div>
 	</div>
 <% end_if %>
 
