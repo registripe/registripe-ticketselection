@@ -6,7 +6,11 @@ class EventTicketTicketSelectionExtension extends DataExtension {
 		'TicketSelections' => 'TicketSelection'
 	);
 
-		/**
+	public function updateCMSFields(FieldList $fields) {
+		$fields->removeByName("TicketSelections");
+	}
+
+	/**
 	 * Creates a ticket selection data object for this ticket.
 	 */
 	public function createSelection() {
