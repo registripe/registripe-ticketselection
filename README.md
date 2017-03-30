@@ -16,3 +16,5 @@ Handles choosing tickets during registration process.
  * Back button.
  * Prevent invalid submissions.
  * Ensure attendees are deleted when selections are deleted
+
+ * Navigating backwards through selections doesn't go to end of group
