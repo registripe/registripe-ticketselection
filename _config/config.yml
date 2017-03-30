@@ -13,5 +13,6 @@ EventRegistration:
     - Cost
 
 AttendeeTicketSelection:
+  select_controller_action: attendee
   calculators:
     - SelectionCost

@@ -17,11 +17,18 @@ class TicketSelectionController extends Page_Controller {
 		$this->selection = $selection;
 	}
 
+	/**
+	 * Choose appropriate action, based on selection's action
+	 */
 	public function index($request) {
-		return $this->attendee($request);
+		$action = $this->selection->stat("select_controller_action");
+		return $this->$action($request);
 	}
 
 	public function attendee() {
+
+		// TODO: attach entire attendee controller instead.
+
 		$form = $this->AttendeeForm();
 		$attendee = $this->selection->Attendee();
 
