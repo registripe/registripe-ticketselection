@@ -14,7 +14,7 @@ class EventTicketTicketSelectionExtension extends DataExtension {
 	 * Creates a ticket selection data object for this ticket.
 	 */
 	public function createSelection() {
-		$class = Config::inst()->get(get_class($this->owner), 'selection_type');
+		$class = $this->owner->stat('selection_type');
 		$selection = $class::create();
 		$selection->TicketID = $this->owner->ID;
 		return $selection;
