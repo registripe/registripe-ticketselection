@@ -1,0 +1,18 @@
+{
+	"name": "registripe/registripe-ticketselection",
+	"description": "Ticket selection sub-module for RegiStripe module",
+	"type": "silverstripe-module",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Jeremy Shipman",
+			"email": "jeremy@burnbright.net"
+		}
+	],
+	"require": {
+		"registripe/registripe-core": "*"
+	},
+	"extra": {
+		"installer-name": "registripe_ticketselection"
+	}
+}
