@@ -10,6 +10,10 @@ class EventRegistrationTicketSelectionExtension extends DataExtension {
 		"Cost" => "Currency"
 	);
 
+	public function updateCMSFields(FieldList $fields) {
+		$fields->removeByName("TicketSelections");
+	}
+
 	public function getCost() {
 		return $this->calculateCost();
 	}
