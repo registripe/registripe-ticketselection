@@ -1,6 +1,6 @@
 # Registripe - Ticket Selection
 
-Handles choosing tickets during registration process.
+Enables selecting more than just attendees for a registration: groups for example.
 
  * Create / edit ticket selections.
  * Navigate through selections.
