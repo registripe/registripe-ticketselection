@@ -12,6 +12,10 @@ class TicketSelectorRegisterControllerExtension extends Extension {
 		'selection/$ID' => 'selection',
 	);
 
+	public function getShowPrices() {
+		return true;
+	}
+
 	public function selectTicket($request) {
 		// TODO: CSRF security
 		$reg = $this->owner->getCurrentRegistration();

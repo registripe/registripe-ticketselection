@@ -5,8 +5,12 @@
 		<div class="ticket">
 			<div class="ticket_header">
 				<div class="col-xs-10">
-					<span class="ticket_name">
-						$Title<% if ShowPrices %> $Price.Nicer<% end_if %>
+					<span class="ticket_row">
+						<span class="ticket_row_title">$Title</span>
+						<div class="ticket_row_secondary">
+							<% if $SubTitle %><span class="ticket_row_subtitle"> $SubTitle</span><% end_if %>
+							<% if $Top.ShowPrices && ShowFreeLabel %> <span class="ticket_row_price">$Price.Nicer</span><% end_if %>
+						</div>
 					</span>
 				</div>
 				<div class="col-xs-2 text-right">
@@ -56,5 +60,5 @@
 <% end_if %>
 
 <% if FirstSelectionLink %>
-	<a class="btn btn-primary btn-block" href="$FirstSelectionLink">Next</a>
+	<a class="btn btn-primary" href="$FirstSelectionLink">Next</a>
 <% end_if %>
