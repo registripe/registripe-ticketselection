@@ -16,3 +16,7 @@ AttendeeTicketSelection:
   select_controller_action: attendee
   calculators:
     - SelectionCost
+
+Injector:
+  EventRegistration\Calculator:
+    class: EventRegistration\Calculator\RegistrationCalculator

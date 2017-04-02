@@ -11,7 +11,7 @@ class RegistrationCalculator extends AbstractCalculator {
 		);
 	}
 
-	public function calculate($value) {
+	public function calculate($value = 0) {
 		$composed = new ComposedCalculator($this->calculators);
 		return $composed->calculate($value);
 	}
