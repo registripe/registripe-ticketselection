@@ -2,19 +2,7 @@
 
 namespace EventRegistration\Calculator;
 
-class SelectionCostCalculator extends AbstractCalculator{
-
-	protected $selection;
-
-	protected $persist = true;
-
-	public function __construct(\TicketSelection $selection) {
-		$this->selection = $selection;
-	}
-
-	public function setPersist($persist) {
-		$this->persist = $persist;
-	}
+class SelectionCostCalculator extends SelectionCalculator{
 
 	public function calculate($value) {
 		$cost = 0;

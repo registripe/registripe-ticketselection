@@ -13,10 +13,16 @@ class ComposedCalculator extends AbstractCalculator {
 		$this->calculators = $calculators;
 	}
 
+	/**
+	 * Pass a single value through multiple calculators to get a total.
+	 *
+	 * @param number $value
+	 * @return void
+	 */
 	public function calculate($value) {
 		$total = 0;
 		foreach($this->calculators as $calculator) {
-			$total += $calculator->calculate($value);
+			$total = $calculator->calculate($total);
 		}
 		return $value + $total;
 	}

@@ -47,7 +47,7 @@ class TicketSelectionController extends Page_Controller {
 		$form = new EventAttendeeForm($this, "AttendeeForm");
 		$form->Actions()->push(FormAction::create("save", "Next"));
 		$form->addCancelLink($this->BackURL, "Back");
-		$this->extend("updateAttendeeForm", $form, $this->registration);
+		$this->extend("updateAttendeeForm", $form, $this->registration, $this->selection);
 		return $form;
 	}
 

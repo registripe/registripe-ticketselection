@@ -12,10 +12,11 @@ abstract class AbstractCalculator{
 
 	/**
 	 * Get components for a given dataobject.
+	 * @return array
 	 */
-	protected function calculatorsFor(\DataObject $dataobject) {
-		$names = $dataobject->stat("calculators");
-		return $this->initCalculators($names, $dataobject);
+	protected function calculatorsFor(\DataObject $obj) {
+		$names = $obj->stat("calculators");
+		return $this->initCalculators($names, $obj);
 	}
 
 	/**
@@ -28,9 +29,9 @@ abstract class AbstractCalculator{
 		$calculators = array();
 		foreach($names as $name) {
 			$calculator = $injector->create($this->nameToClass($name), $dataobject);
-			array_push($calculators, $calculator);
+			$calculators[$name] = $calculator;
 		}
-		return new ComposedCalculator($calculators);
+		return $calculators;
 	}
 	
 	/**
