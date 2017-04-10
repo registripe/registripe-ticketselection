@@ -14,7 +14,7 @@ EventRegistration:
 
 AttendeeTicketSelection:
   select_controller_action: attendee
-  calculators:
+  default_calculators:
     - SelectionCost
 
 Injector:

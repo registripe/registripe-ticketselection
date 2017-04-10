@@ -15,7 +15,9 @@ abstract class AbstractCalculator{
 	 * @return array
 	 */
 	protected function calculatorsFor(\DataObject $obj) {
+		// allow overriding default calculators array
 		$names = $obj->stat("calculators");
+		$names = $names ? $names : $obj->stat("default_calculators");
 		return $this->initCalculators($names, $obj);
 	}
 
