@@ -6,8 +6,7 @@ class RegistrationCalculator extends AbstractCalculator {
 
 	public function __construct(\EventRegistration $registration) {
 		$this->calculators = array(
-			new SelectionsCalculator($registration->TicketSelections()),
-			// new RegistrationCalculator($registration)
+			new SelectionsCalculator($registration->TicketSelections())
 		);
 	}
 
