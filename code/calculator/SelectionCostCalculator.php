@@ -13,6 +13,10 @@ class SelectionCostCalculator extends SelectionCalculator{
 		if($this->persist) {
 			$this->selection->Cost = $cost;
 			$this->selection->write();
+			if ($attendee = $this->selection->Attendee()) {
+				$attendee->Cost = $cost;
+				$attendee->write();
+			}
 		}
 		return $value + $cost;
 	}
