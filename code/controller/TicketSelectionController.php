@@ -26,21 +26,35 @@ class TicketSelectionController extends Page_Controller {
 	}
 
 	public function attendee() {
-
 		// TODO: attach entire attendee controller instead.
-
 		$form = $this->AttendeeForm();
 		$attendee = $this->selection->Attendee();
-
-		// TODO: don't overwrite session-loaded data
-
-		if ($attendee) {
-			$form->loadDataFrom($attendee);
+		// load form data from attendee, if not already loaded from session
+		if (!$form->hasSessionData()) {
+			if ($attendee->isInDB()) {
+				$form->loadDataFrom($attendee);
+			} else {
+				$this->populatePreviousData($form);
+			}
 		}
+		// we need TicketID from selection, as it is a required field
 		$form->loadDataFrom($this->selection);
 		return array(
 			"Form" => $form
 		);
+	}
+
+		// poplate given form with specfific data from last attednee
+	protected function populatePreviousData(Form $form) {
+		$prepops = EventAttendee::config()->prepopulated_fields;
+		if (!$prepops) {
+			return;
+		}
+		$latestattendee = $this->registration->Attendees()
+			->sort("LastEdited", "DESC")->first();
+		if($latestattendee){
+			$form->loadDataFrom($latestattendee, Form::MERGE_DEFAULT, $prepops);	
+		}
 	}
 
 	public function AttendeeForm() {
