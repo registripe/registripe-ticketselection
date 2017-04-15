@@ -17,7 +17,6 @@ class TicketSelectorRegisterControllerExtension extends Extension {
 	}
 
 	public function selectTicket($request) {
-		// TODO: CSRF security
 		$reg = $this->owner->getCurrentRegistration();
 		$event = $reg->Event();
 		$tickets = $event->getAvailableTickets();
@@ -40,6 +39,7 @@ class TicketSelectorRegisterControllerExtension extends Extension {
 			$selections->sort("ID", "DESC")
 				->find("TicketID", $ticket->ID)->delete();
 		}
+		
 		return $this->owner->redirectBack();
 	}
 
