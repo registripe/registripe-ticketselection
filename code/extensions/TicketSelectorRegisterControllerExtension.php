@@ -28,8 +28,13 @@ class TicketSelectorRegisterControllerExtension extends Extension {
 			return $this->owner->redirectBack();
 		}		
 		if($request->postVar("action_add") !== null) {
-			$selection = $ticket->createSelection($ticket)->write();
+			$selection = $ticket->createSelection($ticket);
+			$id = $selection->write();
 			$selections->add($selection);
+			if ($selection->stat("redirect_on_add")) {
+				$link = $this->owner->Link($this->selectionSegment($selection));
+				return $this->owner->redirect($link);
+			}
 		}
 		if($request->postVar("action_subtract") !== null) {
 			$selections->sort("ID", "DESC")
