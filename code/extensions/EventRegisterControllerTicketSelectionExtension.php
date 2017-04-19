@@ -92,6 +92,10 @@ class EventRegisterControllerTicketSelectionExtension extends Extension {
 		return $controller;
 	}
 
+	public function updateReviewTable($registration, &$customisations) {
+		$customisations["ControllerLink"] = $this->owner->Link();
+	}
+
 	protected function selectionSegment($selection) {
 		return Controller::join_links('selection', $selection->ID);
 	}

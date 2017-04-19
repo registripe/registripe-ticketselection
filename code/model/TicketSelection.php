@@ -11,4 +11,12 @@ class TicketSelection extends DataObject {
 		"Ticket" => "EventTicket"
 	);
 
+	private static $row_template = "TicketSelection_row";
+
+	public function RenderRow($baselink = "") {
+		return $this->renderWith($this->stat("row_template"), array(
+			"BaseLink" => $baselink
+		));
+	}
+
 }
