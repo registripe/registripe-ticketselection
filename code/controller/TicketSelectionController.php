@@ -8,7 +8,8 @@ class TicketSelectionController extends Page_Controller {
 	public static $allowed_actions = array(
 		'index',
 		'attendee',
-		'AttendeeForm'
+		'AttendeeForm',
+		'delete'
 	);
 
 	public function __construct($record, EventRegistration $registration, TicketSelection $selection){
@@ -44,7 +45,7 @@ class TicketSelectionController extends Page_Controller {
 		);
 	}
 
-		// poplate given form with specfific data from last attednee
+	// poplate given form with specfific data from last attednee
 	protected function populatePreviousData(Form $form) {
 		$prepops = EventAttendee::config()->prepopulated_fields;
 		if (!$prepops) {
@@ -79,7 +80,22 @@ class TicketSelectionController extends Page_Controller {
 	}
 
 	/**
+	 * Delete this selection and return to previous page.
+	 *
+	 * @param HTTPRequest $request
+	 * @return HTTPResponse
+	 */
+	public function delete($request) {
+		$this->extend("onBeforeDelete", $this->selection, $this->registration);
+		$this->selection->delete();
+		$this->selection->destroy();
+		return $this->redirectBack();
+	}
+
+	/**
 	 * Helper for creating new attendee on registration.
+	 * 
+	 * @return EventAttendee
 	 */
 	protected function createAttendee() {
 		$attendee = EventAttendee::create();
