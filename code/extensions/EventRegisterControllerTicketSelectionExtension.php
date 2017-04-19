@@ -1,6 +1,6 @@
 <?php
 
-class TicketSelectorRegisterControllerExtension extends Extension {
+class EventRegisterControllerTicketSelectionExtension extends Extension {
 
 	private static $allowed_actions = array(
 		'choose',
