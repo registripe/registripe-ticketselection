@@ -13,7 +13,9 @@ class SelectionCostCalculator extends SelectionCalculator{
 		if($this->persist) {
 			$this->selection->Cost = $cost;
 			$this->selection->write();
-			if ($attendee = $this->selection->Attendee()) {
+			$attendee = $this->selection->Attendee();
+			// only write attendee if it is in DB already
+			if ($attendee && $attendee->exists()) {
 				$attendee->Cost = $cost;
 				$attendee->write();
 			}
